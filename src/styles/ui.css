@@ -414,3 +414,267 @@ body {
     flex-wrap: wrap;
   }
 }
+
+/* ============================================
+   SIDEBAR COMPONENT
+   ============================================ */
+.sidebar-toggle {
+  display: none;
+  position: fixed;
+  top: var(--space-4);
+  left: var(--space-4);
+  z-index: 1000;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  cursor: pointer;
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  box-shadow: var(--shadow-md);
+}
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+.sidebar-overlay.show {
+  display: block;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 280px;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  padding: var(--space-6);
+  overflow-y: auto;
+  z-index: 999;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+/* Sidebar is hidden by default, toggleable on all screen sizes */
+/* On larger screens, you can modify this to show by default if needed */
+
+.sidebar-logo {
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.sidebar-nav a:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-primary);
+}
+
+.sidebar-nav a.active {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.sidebar-icon {
+  font-size: var(--font-size-lg);
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .sidebar-toggle {
+    display: block;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}
+
+/* ============================================
+   FOOTER COMPONENT
+   ============================================ */
+.footer {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-8) 0 var(--space-6) 0;
+  margin-top: var(--space-8);
+}
+
+.footer-brand {
+  grid-column: span 1;
+}
+
+.footer-logo {
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+}
+
+.footer-links h4 {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0 0 var(--space-4) 0;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.footer-links a {
+  color: var(--color-muted-text);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--color-primary);
+}
+
+.footer-copyright {
+  color: var(--color-muted-text);
+  font-size: var(--font-size-sm);
+  margin: var(--space-4) 0 0 0;
+}
+
+.footer-bottom {
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.footer-copyright-small {
+  color: var(--color-muted-text);
+  font-size: var(--font-size-sm);
+  margin: 0;
+}
+
+.footer-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-size: var(--font-size-md);
+}
+
+.footer-social:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: var(--space-6) 0 var(--space-4) 0;
+  }
+
+  .footer-brand,
+  .footer-links {
+    grid-column: span 4;
+    margin-bottom: var(--space-5);
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+}
+
+/* ============================================
+   BADGE COMPONENT
+   ============================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.badge-default {
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+
+.badge-primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.badge-success {
+  background: #10b981;
+  color: var(--color-white);
+}
+
+.badge-warning {
+  background: #f59e0b;
+  color: var(--color-white);
+}
+
+.badge-danger {
+  background: #ef4444;
+  color: var(--color-white);
+}
+
+/* ============================================
+   HERO COMPONENT
+   ============================================ */
+.hero {
+  padding: var(--space-8) 0;
+  background: linear-gradient(to bottom, var(--color-background), var(--color-surface));
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-6) 0;
+  }
+}

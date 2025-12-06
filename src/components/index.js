@@ -5,3 +5,7 @@ export { default as SectionHeader } from './SectionHeader';
 export { default as Navbar } from './Navbar';
 export { default as Grid } from './Grid';
 export { default as Flex } from './Flex';
+export { default as Sidebar } from './Sidebar';
+export { default as Footer } from './Footer';
+export { default as Badge } from './Badge';
+export { default as Hero } from './Hero';
