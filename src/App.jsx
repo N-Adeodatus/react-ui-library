@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { 
   Navbar, 
   Container, 
@@ -9,10 +10,22 @@ import {
   Hero,
   Badge,
   Sidebar,
-  Footer
+  Footer,
+  Input,
+  Textarea,
+  Select,
+  Avatar,
+  Divider,
+  Modal,
+  Tabs,
+  Pagination
 } from './components';
 
 export default function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('design');
+  const [currentPage, setCurrentPage] = useState(2);
+
   return (
     <>
       <Navbar 
@@ -105,6 +118,59 @@ export default function App() {
               <p style={{ margin: 0, fontSize: 'var(--font-size-sm)', color: 'var(--color-muted-text)' }}>
                 Use badges to highlight status, categories, or labels
               </p>
+            </Flex>
+          </Card>
+        </Grid>
+      </Container>
+
+      {/* UI Elements */}
+      <Container style={{ marginTop: 'var(--space-8)', marginBottom: 'var(--space-8)' }}>
+        <SectionHeader 
+          title="Forms & UI Essentials" 
+          subtitle="Modern, consistent building blocks ready for production." 
+        />
+
+        <Grid columns={2} gap="var(--space-5)">
+          <Card title="Form Controls" description="Inputs that align with your design tokens and show validation states.">
+            <Flex direction="column" gap="var(--space-3)">
+              <Input label="Email" type="email" placeholder="you@example.com" />
+              <Input label="Password" type="password" placeholder="••••••••" error="Password must be at least 8 characters" />
+              <Select 
+                label="Role" 
+                options={[
+                  { label: 'Designer', value: 'designer' },
+                  { label: 'Developer', value: 'developer' },
+                  { label: 'Product Manager', value: 'pm' },
+                ]}
+              />
+              <Textarea label="Project Notes" placeholder="Share a quick brief..." rows={3} />
+            </Flex>
+          </Card>
+
+          <Card title="Avatars, Tabs, and Pagination" description="Profile visuals, content switching, and pagination controls.">
+            <Flex direction="column" gap="var(--space-4)">
+              <Flex align="center" gap="var(--space-3)">
+                <Avatar alt="Taylor Green" />
+                <Avatar initials="AC" size="lg" />
+                <Avatar src="https://i.pravatar.cc/150?img=5" alt="Profile" size="lg" />
+              </Flex>
+
+              <Divider />
+
+              <Tabs 
+                tabs={[
+                  { label: 'Design', value: 'design', content: <p>Design tokens, spacing, and accessible defaults.</p> },
+                  { label: 'Build', value: 'build', content: <p>Composable components ready for shipping features.</p> },
+                  { label: 'Ship', value: 'ship', content: <p>Responsive layouts and polished interactions.</p> },
+                ]}
+                value={activeTab}
+                onChange={setActiveTab}
+              />
+
+              <Flex align="center" justify="space-between">
+                <Button variant="outline" onClick={() => setIsModalOpen(true)}>Open Modal</Button>
+                <Pagination totalPages={5} currentPage={currentPage} onPageChange={setCurrentPage} />
+              </Flex>
             </Flex>
           </Card>
         </Grid>
@@ -228,6 +294,22 @@ export default function App() {
           { name: 'LinkedIn', href: '#linkedin', label: 'LinkedIn' }
         ]}
       />
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Quick Modal"
+        footer={
+          <>
+            <Button variant="secondary" onClick={() => setIsModalOpen(false)}>Close</Button>
+            <Button variant="primary">Save</Button>
+          </>
+        }
+      >
+        <p style={{ margin: 0 }}>
+          Use modals for confirmations, short forms, or focused flows.
+        </p>
+      </Modal>
     </>
   );
 }

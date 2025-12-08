@@ -15,7 +15,7 @@ export default function Navbar({ logo, links = [], className = '', actions = nul
           {logo}
         </div>
 
-        <nav style={{ position: 'relative' }}>
+        <nav className="nav-inline">
           <button 
             className="nav-toggle" 
             onClick={toggleMenu}
@@ -23,7 +23,7 @@ export default function Navbar({ logo, links = [], className = '', actions = nul
           >
             {isMenuOpen ? '✕' : '☰'}
           </button>
-          
+
           <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
             {links.map((l, i) => (
               <a 
@@ -34,9 +34,12 @@ export default function Navbar({ logo, links = [], className = '', actions = nul
                 {l.label}
               </a>
             ))}
+            <div className="nav-actions nav-actions-mobile">
+              {actions || <Button variant="primary">Sign up</Button>}
+            </div>
           </div>
 
-          <div className="nav-actions">
+          <div className="nav-actions nav-actions-desktop">
             {actions || <Button variant="primary">Sign up</Button>}
           </div>
         </nav>
