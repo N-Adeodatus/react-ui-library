@@ -18,13 +18,38 @@ import {
   Divider,
   Modal,
   Tabs,
-  Pagination
+  Pagination,
+  Checkbox,
+  Radio,
+  Switch,
+  Progress,
+  Alert,
+  Tooltip,
+  Spinner,
+  EmptyState,
+  SearchInput,
+  Dropdown,
+  Toast,
+  ListItem
 } from './components';
 
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('design');
   const [currentPage, setCurrentPage] = useState(2);
+  const [checkbox1, setCheckbox1] = useState(false);
+  const [checkbox2, setCheckbox2] = useState(true);
+  const [radioValue, setRadioValue] = useState('option1');
+  const [switch1, setSwitch1] = useState(false);
+  const [switch2, setSwitch2] = useState(true);
+  const [progress, setProgress] = useState(65);
+  const [showAlert, setShowAlert] = useState(true);
+  const [showToast, setShowToast] = useState(false);
+  const [todos, setTodos] = useState([
+    { id: 1, text: 'Complete project documentation', completed: false },
+    { id: 2, text: 'Review pull requests', completed: true },
+    { id: 3, text: 'Plan next sprint', completed: false },
+  ]);
 
   return (
     <>
@@ -176,6 +201,250 @@ export default function App() {
         </Grid>
       </Container>
 
+      {/* Checkboxes, Radios, and Switches */}
+      <Container style={{ marginTop: 'var(--space-8)', marginBottom: 'var(--space-8)' }}>
+        <SectionHeader 
+          title="Interactive Controls" 
+          subtitle="Checkboxes, radio buttons, and switches for user input." 
+        />
+
+        <Grid columns={3} gap="var(--space-5)">
+          <Card title="Checkboxes" description="Select multiple options or toggle states.">
+            <Flex direction="column" gap="var(--space-3)">
+              <Checkbox 
+                label="I agree to the terms and conditions" 
+                checked={checkbox1}
+                onChange={(e) => setCheckbox1(e.target.checked)}
+              />
+              <Checkbox 
+                label="Subscribe to newsletter" 
+                checked={checkbox2}
+                onChange={(e) => setCheckbox2(e.target.checked)}
+              />
+              <Checkbox 
+                label="Disabled checkbox" 
+                disabled
+              />
+            </Flex>
+          </Card>
+
+          <Card title="Radio Buttons" description="Select a single option from a group.">
+            <Flex direction="column" gap="var(--space-3)">
+              <Radio 
+                label="Option 1" 
+                name="radio-group"
+                value="option1"
+                checked={radioValue === 'option1'}
+                onChange={(e) => setRadioValue(e.target.value)}
+              />
+              <Radio 
+                label="Option 2" 
+                name="radio-group"
+                value="option2"
+                checked={radioValue === 'option2'}
+                onChange={(e) => setRadioValue(e.target.value)}
+              />
+              <Radio 
+                label="Option 3 (Disabled)" 
+                name="radio-group"
+                value="option3"
+                disabled
+              />
+            </Flex>
+          </Card>
+
+          <Card title="Switches" description="Toggle settings on or off.">
+            <Flex direction="column" gap="var(--space-3)">
+              <Switch 
+                label="Enable notifications" 
+                checked={switch1}
+                onChange={(e) => setSwitch1(e.target.checked)}
+              />
+              <Switch 
+                label="Dark mode" 
+                checked={switch2}
+                onChange={(e) => setSwitch2(e.target.checked)}
+              />
+              <Switch 
+                label="Disabled switch" 
+                disabled
+              />
+            </Flex>
+          </Card>
+        </Grid>
+      </Container>
+
+      {/* Progress, Alerts, and Status Components */}
+      <Container style={{ marginTop: 'var(--space-8)', marginBottom: 'var(--space-8)' }}>
+        <SectionHeader 
+          title="Status & Feedback" 
+          subtitle="Progress indicators, alerts, and loading states." 
+        />
+
+        <Grid columns={2} gap="var(--space-5)">
+          <Card title="Progress Bars" description="Show completion status or loading progress.">
+            <Flex direction="column" gap="var(--space-4)">
+              <div>
+                <Progress value={progress} showLabel size="md" variant="primary" />
+              </div>
+              <div>
+                <Progress value={45} showLabel size="sm" variant="success" />
+              </div>
+              <div>
+                <Progress value={75} showLabel size="lg" variant="warning" />
+              </div>
+              <Button variant="outline" onClick={() => setProgress(Math.min(100, progress + 10))}>
+                Increase Progress
+              </Button>
+            </Flex>
+          </Card>
+
+          <Card title="Alerts & Spinners" description="Display important messages and loading states.">
+            <Flex direction="column" gap="var(--space-3)">
+              {showAlert && (
+                <Alert variant="info" title="Info" onClose={() => setShowAlert(false)}>
+                  This is an informational message that can be dismissed.
+                </Alert>
+              )}
+              <Alert variant="success" title="Success">
+                Your changes have been saved successfully.
+              </Alert>
+              <Alert variant="warning" title="Warning">
+                Please review your settings before continuing.
+              </Alert>
+              <Alert variant="danger" title="Error">
+                Something went wrong. Please try again.
+              </Alert>
+              <Flex align="center" gap="var(--space-3)">
+                <Spinner size="sm" />
+                <Spinner size="md" />
+                <Spinner size="lg" />
+                <span style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-muted-text)' }}>
+                  Loading...
+                </span>
+              </Flex>
+            </Flex>
+          </Card>
+        </Grid>
+      </Container>
+
+      {/* Todo App Example */}
+      <Container style={{ marginTop: 'var(--space-8)', marginBottom: 'var(--space-8)' }}>
+        <SectionHeader 
+          title="Todo App Example" 
+          subtitle="A complete task management interface using our components." 
+        />
+
+        <Grid columns={2} gap="var(--space-5)">
+          <Card title="Task List" description="Interactive todo list with checkboxes.">
+            <Flex direction="column" gap="var(--space-2)">
+              {todos.length > 0 ? (
+                todos.map((todo) => (
+                  <ListItem
+                    key={todo.id}
+                    onClick={() => {
+                      setTodos(todos.map(t => 
+                        t.id === todo.id ? { ...t, completed: !t.completed } : t
+                      ));
+                    }}
+                    selected={todo.completed}
+                  >
+                    <Flex align="center" gap="var(--space-3)">
+                      <Checkbox 
+                        checked={todo.completed}
+                        onChange={() => {
+                          setTodos(todos.map(t => 
+                            t.id === todo.id ? { ...t, completed: !t.completed } : t
+                          ));
+                        }}
+                      />
+                      <span style={{ 
+                        textDecoration: todo.completed ? 'line-through' : 'none',
+                        opacity: todo.completed ? 0.6 : 1,
+                        flex: 1
+                      }}>
+                        {todo.text}
+                      </span>
+                    </Flex>
+                  </ListItem>
+                ))
+              ) : (
+                <EmptyState
+                  icon="📝"
+                  title="No tasks yet"
+                  description="Add a new task to get started"
+                />
+              )}
+            </Flex>
+          </Card>
+
+          <Card title="Search & Dropdown" description="Search functionality and dropdown menus.">
+            <Flex direction="column" gap="var(--space-4)">
+              <SearchInput 
+                placeholder="Search tasks..." 
+                onSearch={(value) => console.log('Searching for:', value)}
+              />
+              
+              <Divider />
+
+              <Flex direction="column" gap="var(--space-2)">
+                <span style={{ fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-text)' }}>
+                  Actions Menu
+                </span>
+                <Dropdown
+                  trigger={<Button variant="outline">More Options</Button>}
+                  items={[
+                    { label: 'Edit', icon: '✏️' },
+                    { label: 'Duplicate', icon: '📋' },
+                    { divider: true },
+                    { label: 'Archive', icon: '📦' },
+                    { label: 'Delete', icon: '🗑️', disabled: true },
+                  ]}
+                  onSelect={(item) => {
+                    setShowToast(true);
+                    setTimeout(() => setShowToast(false), 3000);
+                  }}
+                />
+              </Flex>
+
+              <Divider />
+
+              <Tooltip content="This is a helpful tooltip" position="top">
+                <Button variant="secondary">Hover for tooltip</Button>
+              </Tooltip>
+            </Flex>
+          </Card>
+        </Grid>
+      </Container>
+
+      {/* Empty States & Additional Components */}
+      <Container style={{ marginTop: 'var(--space-8)', marginBottom: 'var(--space-8)' }}>
+        <SectionHeader 
+          title="Empty States & Utilities" 
+          subtitle="Handle empty content gracefully with helpful messages." 
+        />
+
+        <Grid columns={2} gap="var(--space-5)">
+          <Card>
+            <EmptyState
+              icon="📭"
+              title="No messages"
+              description="You don't have any messages yet. Start a conversation to see them here."
+              action={<Button variant="primary">New Message</Button>}
+            />
+          </Card>
+
+          <Card>
+            <EmptyState
+              icon="📊"
+              title="No data available"
+              description="There's no data to display at the moment. Check back later or add some data."
+              action={<Button variant="outline">Refresh</Button>}
+            />
+          </Card>
+        </Grid>
+      </Container>
+
       {/* Sidebar Demo Section */}
       <Container style={{ marginTop: 'var(--space-8)', marginBottom: 'var(--space-8)' }}>
         <SectionHeader 
@@ -310,6 +579,22 @@ export default function App() {
           Use modals for confirmations, short forms, or focused flows.
         </p>
       </Modal>
+
+      {/* Toast Notification */}
+      {showToast && (
+        <div style={{
+          position: 'fixed',
+          bottom: 'var(--space-4)',
+          right: 'var(--space-4)',
+          zIndex: 1000
+        }}>
+          <Toast
+            message="Action completed successfully!"
+            variant="success"
+            onClose={() => setShowToast(false)}
+          />
+        </div>
+      )}
     </>
   );
 }
