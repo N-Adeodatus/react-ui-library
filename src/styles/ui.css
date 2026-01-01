@@ -490,7 +490,7 @@ html {
    ============================================ */
 .sidebar-toggle {
   display: none;
-  position: fixed;
+  position: absolute;
   top: calc(var(--space-4) + 60px);
   left: var(--space-4);
   z-index: 99;
