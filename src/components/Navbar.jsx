@@ -20,6 +20,7 @@ export default function Navbar({ logo, links = [], className = '', actions = nul
             className="nav-toggle" 
             onClick={toggleMenu}
             aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? '✕' : '☰'}
           </button>
