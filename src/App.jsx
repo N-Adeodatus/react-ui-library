@@ -30,7 +30,8 @@ import {
   SearchInput,
   Dropdown,
   Toast,
-  ListItem
+  ListItem,
+  DarkModeToggle
 } from './components';
 
 export default function App() {
@@ -60,7 +61,8 @@ export default function App() {
           { label: 'Components', href: '#components' },
           { label: 'Docs', href: '#docs' },
           { label: 'About', href: '#about' }
-        ]} 
+        ]}
+        actions={<DarkModeToggle />}
       />
 
       {/* Hero Section using Hero component */}
@@ -87,7 +89,7 @@ export default function App() {
               <Badge variant="primary">New</Badge>
               <Badge variant="success">Popular</Badge>
             </Flex>
-            <Button variant="outline" style={{ marginTop: 'var(--space-3)' }}>Learn More</Button>
+            <Button variant=" outline" style={{ marginTop: 'var(--space-3)' }}>Learn More</Button>
           </Card>
 
           <Card 

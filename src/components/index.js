@@ -29,3 +29,4 @@ export { default as SearchInput } from './SearchInput';
 export { default as Dropdown } from './Dropdown';
 export { default as Toast } from './Toast';
 export { default as ListItem } from './ListItem';
+export { default as DarkModeToggle } from './DarkModeToggle';
