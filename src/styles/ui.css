@@ -301,6 +301,7 @@ html {
   display: flex;
   align-items: center;
   gap: var(--space-1);
+  width: var(--space-8);
 }
 
 .nav-links a {
@@ -365,8 +366,9 @@ html {
     display: none;
     position: absolute;
     top: 100%;
-    right: calc(-1 * var(--space-4));
-    left: calc(-1 * var(--space-4));
+    right: 50%;
+    /* left: calc(-1 * var(--space-4));
+    left: -350%; */
     background: var(--color-surface);
     border-bottom: 1px solid var(--color-border);
     box-shadow: var(--shadow-lg);
@@ -380,6 +382,7 @@ html {
 
   .nav-links.open {
     display: flex;
+    width: 200px;
   }
 
   .nav-links a {
@@ -490,7 +493,7 @@ html {
    ============================================ */
 .sidebar-toggle {
   display: none;
-  position: absolute;
+  position: fixed;
   top: calc(var(--space-4) + 60px);
   left: var(--space-4);
   z-index: 99;
